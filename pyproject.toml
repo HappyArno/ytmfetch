@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ytmfetch"
+version = "0.1.0"
+description = "Download songs from YouTube Music using a JSON song list"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E.*"]
+requires-python = ">=3.10"
+dependencies = ["yt-dlp>=2023.12.30", "pathvalidate>=3.2.0"]
+
+[project.scripts]
+ytmfetch = "ytmfetch:main"
+
+[tool.setuptools]
+py-modules = ["ytmfetch"]
