@@ -5,6 +5,7 @@ import argparse
 from pathlib import Path
 from pathvalidate import is_valid_filename
 from dataclasses import dataclass
+from importlib import metadata
 
 
 @dataclass
@@ -100,9 +101,19 @@ class Downloader:
         self.walk_music_tree(songs, self.config.dir)
 
 
+def get_version() -> str:
+    try:
+        return metadata.version("ytmfetch")
+    except metadata.PackageNotFoundError:
+        return "0+unknown"
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Download songs from YouTube Music using a JSON song list"
+    )
+    parser.add_argument(
+        "--version", action="version", version="%(prog)s " + get_version()
     )
     parser.add_argument(
         "-v",
