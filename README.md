@@ -6,6 +6,7 @@ Download songs from YouTube Music using a JSON song list.
 
 - Python 3.10+
 - `ffmpeg` available on your PATH (needed for audio conversion, metadata, and thumbnails)
+- (optional) A JavaScript runtime
 
 ## Installation
 
@@ -40,7 +41,9 @@ The songs file format:
 ```bash
 ytmfetch
 # or with options
-ytmfetch -d ~/Music -s songs.json -q 192
+ytmfetch --dir ~/Music --songs-file songs.json --quality 192
+# or specify the browser to load cookies from and the JS runtime if you run into login or verification issues
+ytmfetch --cookies-from-browser firefox --js-runtimes node
 ```
 
 ### Enjoy Music!
@@ -52,6 +55,7 @@ Find your MP3s (with metadata and cover art) in the target directory.
 ```
 options:
   -h, --help            show this help message and exit
+  --version             show program's version number and exit
   -v, --verbose, --no-verbose
                         Enable verbose logging
   -w, --overwrite, --no-overwrite
@@ -61,6 +65,10 @@ options:
                         Path to the songs JSON file
   -q, --quality QUALITY
                         Set audio quality (VBR/CBR)
+  -b, --cookies-from-browser COOKIES_FROM_BROWSER
+                        The name of the browser to load cookies from
+  -j, --js-runtimes JS_RUNTIMES
+                        External JavaScript runtime for YouTube JavaScript challenges
 ```
 
 ## License

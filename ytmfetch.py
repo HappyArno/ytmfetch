@@ -61,6 +61,16 @@ class Downloader:
             "continuedl": True,
             "ignoreerrors": False,
             "overwrites": self.config.overwrite,
+            **(
+                {"cookiesfrombrowser": (self.config.cookies_from_browser,)}
+                if self.config.cookies_from_browser
+                else {}
+            ),
+            **(
+                {"js_runtimes": {self.config.js_runtimes: {}}}
+                if self.config.js_runtimes
+                else {}
+            ),
             # "postoverwrites": False, # useless
             # "logger": self.logger,
         }
@@ -144,6 +154,16 @@ def parse_args() -> argparse.Namespace:
         "--quality",
         default="128",
         help="Set audio quality (VBR/CBR)",
+    )
+    parser.add_argument(
+        "-b",
+        "--cookies-from-browser",
+        help="The name of the browser to load cookies from",
+    )
+    parser.add_argument(
+        "-j",
+        "--js-runtimes",
+        help="External JavaScript runtime for YouTube JavaScript challenges",
     )
     return parser.parse_args()
 
